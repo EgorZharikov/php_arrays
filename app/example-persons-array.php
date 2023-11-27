@@ -45,3 +45,4 @@ $example_persons_array = [
         'job' => 'babysitter',
     ],
 ];
+?>

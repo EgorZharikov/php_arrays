@@ -1,5 +1,4 @@
 <?php
-include_once("example_persons_array.php");
 function getFullnameFromParts($surname, $name, $patronymic)
 {
     $fullName = $surname . ' ' . $name . ' ' . $patronymic;
@@ -39,6 +38,7 @@ function getGenderFromName($fullName)
 
 function getGenderDescription($arr)
 {
+    //getGenderFromName() return 1(men);-1(women);0(undefined)
     $men_arr = array_filter($arr, function ($arr) {
         return getGenderFromName($arr['fullname']) === 1;
     });
@@ -48,6 +48,7 @@ function getGenderDescription($arr)
     $undefined_arr = array_filter($arr, function ($arr) {
         return getGenderFromName($arr['fullname']) === 0;
     });
+    // calculating percentages men/women/undefined  
     $men = round(count($men_arr) * 100 / (count($men_arr) + count($women_arr) + count($undefined_arr)), 1);
     $women = round(count($women_arr) * 100 / (count($men_arr) + count($women_arr) + count($undefined_arr)), 1);
     $undefined = round(count($undefined_arr) * 100 / (count($men_arr) + count($women_arr) + count($undefined_arr)), 1);
@@ -69,6 +70,7 @@ function getPerfectPartner($surname, $name, $patronymic, $arr)
         echo 'К сожалению ваш пол не определен :(';
     } else {
         $perfectPartner = $arr[rand(0, count($arr) - 1)]['fullname'];
+        //randomize partner from the array with opposite gender
         $genderPartner = getGenderFromName($perfectPartner);
         while ($genderPartner === $gender || $genderPartner === 0) {
             $perfectPartner = $arr[rand(0, count($arr) - 1)]['fullname'];
@@ -84,3 +86,4 @@ function getPerfectPartner($surname, $name, $patronymic, $arr)
         echo $result;
     }
 }
+?>
