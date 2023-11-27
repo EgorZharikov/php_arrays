@@ -1,10 +1,24 @@
 <?php
+/**
+ * function return fullname from parts (surname,name, partonymic)
+ *
+ * @param [string] $surname
+ * @param [string] $name
+ * @param [string] $patronymic
+ * @return [string] $fullname
+ */
 function getFullnameFromParts($surname, $name, $patronymic)
 {
     $fullName = $surname . ' ' . $name . ' ' . $patronymic;
     return mb_convert_case($fullName, MB_CASE_TITLE);
 }
 
+/**
+ * function return parts (surname, name, patronymic) in array from fullname 
+ *
+ * @param [string] $fullName
+ * @return [array] $keys => $parts
+ */
 function getPartsFromFullname($fullName)
 {
     $fullName = mb_convert_case($fullName, MB_CASE_TITLE);
@@ -13,6 +27,12 @@ function getPartsFromFullname($fullName)
     return array_combine($keys, $parts);
 }
 
+/**
+ * function return short name from fullname
+ *
+ * @param [type] $fullName
+ * @return [string] $shortName
+ */
 function getShortName($fullName)
 {
     $parts = getPartsFromFullname($fullName);
@@ -20,6 +40,13 @@ function getShortName($fullName)
     return $shortName;
 }
 
+/**
+ * function determines gender by full name
+ *
+ * @param [string] $fullName
+ * @uses getPartsFromFullName()
+ * @return [int] 1(man);-1(woman);0(undefined)
+ */
 function getGenderFromName($fullName)
 {
     $parts = getPartsFromFullname($fullName);
@@ -36,6 +63,12 @@ function getGenderFromName($fullName)
     return $genderAttribute <=> 0;
 }
 
+/**
+ * function return percent of men, women and undefined
+ *
+ * @param [array] $arr
+ * @return [string] $description
+ */
 function getGenderDescription($arr)
 {
     //getGenderFromName() return 1(men);-1(women);0(undefined)
@@ -62,6 +95,15 @@ function getGenderDescription($arr)
     echo $description;
 }
 
+/**
+ * randomize partner from the array with opposite gender
+ *
+ * @param [string] $surname
+ * @param [string] $name
+ * @param [string] $patronymic
+ * @param [string] $arr
+ * @return [string] $result
+ */
 function getPerfectPartner($surname, $name, $patronymic, $arr)
 {
     $fullName = getFullnameFromParts($surname, $name, $patronymic);

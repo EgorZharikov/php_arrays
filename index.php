@@ -40,12 +40,12 @@ include_once(MAIN_ROOT . "/app/example-persons-array.php");
                     </div>
                     <button type=" submit" name="btn1" class="btn btn-primary">Отправить</button>
                 </form>
-                <div class="alert alert-primary mt-3" role="alert">'
+                <div class="alert alert-primary mt-3" role="alert">
                     <?php
                     if (isset($_POST['btn1'])) {
                         echo getFullnameFromParts($_POST['Surname'], $_POST['Name'], $_POST['Patronomyc']);
                     }
-                    ?>'
+                    ?>
                 </div>
                 <hr>  
                 <div class="mt-4">
@@ -86,6 +86,7 @@ include_once(MAIN_ROOT . "/app/example-persons-array.php");
                 <hr>
                 <div class="mt-4">
                     <h5>getGenderFromName()</h5>
+                    <p>1 = man / -1 = woman / 0 = undefined </p>
                 </div>
                 <form name="form4" action="" method="post">
                     <div class="mt-4 mb-2">
